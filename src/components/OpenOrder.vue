@@ -5,7 +5,7 @@
             <i class="bi bi-chevron-left fs-3" style="color: #022970"></i>
         </a>
     </div>
-    <h1>Ordine n° {{ this.order.id }}</h1>
+    <h1>Order n° {{ this.order.id }}</h1>
     <ul class="list-group list-group-flush">
         <li v-for="item in this.order.items" :key="item.id" class="client-list list-group-item">
             Item ID: {{ item.id }} <br>
