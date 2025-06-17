@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Helvetica Neue';
+    font-weight: normal;
+    font-style: normal;
+    src: url('@/assets/fonts/helveticaneue.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    font-weight: bold; /* Usa 'bold' per la versione in grassetto */
+    font-style: normal;
+    src: url('@/assets/fonts/helveticaneue-bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    font-weight: normal;
+    font-style: italic; /* Usa 'italic' per la versione italica */
+    src: url('@/assets/fonts/helveticaneue-italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    font-weight: lighter; /* Usa 'lighter' o un valore numerico */
+    font-style: normal;
+    src: url('@/assets/fonts/helveticaneue-light.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    font-weight: 500; /* Esempio: Usa un valore numerico per il medio */
+    font-style: normal;
+    src: url('@/assets/fonts/helveticaneue-medium.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    font-weight: 100; /* Esempio: Usa un valore numerico per il sottile */
+    font-style: normal;
+    src: url('@/assets/fonts/helveticaneue-thin.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    font-weight: 100; /* Esempio: Usa un valore numerico o 'lighter' per l'ultra leggero */
+    font-style: normal;
+    src: url('@/assets/fonts/helveticaneue-ultralight.woff') format('woff');
+}
+
+/* Font Bilko (mantieni questi come sono) */
+@font-face {
+    font-family: 'Bilko-bold';
+    font-weight: normal;
+    font-style: normal;
+    src: url('@/assets/fonts/BilkoOpti-Bold.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Bilko-regular';
+    font-weight: normal;
+    font-style: normal;
+    src: url('@/assets/fonts/BilkoOpti-Regular.otf') format('opentype');
+}
