@@ -7,20 +7,20 @@
   </div>
   <div class="d-flex flex-column align-items-center px-5 px-ms-4">
     <div class="d-flex justify-content-center align-items-center">
-      <h1 class="fw-bold mb-4 mt-4">Bentornato!</h1>
+      <h1 class="fw-bold mb-4 mt-4">Welcome back!</h1>
 
     </div>
-    <h2 class=" mb-4 mt-4">Cliente: {{ this.customer.name }}</h2>
+    <h2 class=" mb-4 mt-4">Client: {{ this.customer.name }}</h2>
     <button id="actions"
       class="btn btn-primary py-5 w-100 mb-3 fs-3 fs-sm-1 d-flex justify-content-center align-items-center shadow-lg"
-      @click="this.$router.push({ name: 'Order' })">Nuovo ordine</button>
+      @click="this.$router.push({ name: 'Order' })">New order</button>
     <button id="actions"
       class="btn btn-primary py-5 w-100 mb-3 fs-3 fs-sm-1 d-flex justify-content-center align-items-center shadow-lg"
-      @click="this.$router.push({ name: 'Accept' })">Accetta un ordine</button>
+      @click="this.$router.push({ name: 'Accept' })">Accept an order</button>
   </div>
 
   <div id="ordini-aperti" data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example my-5">
-    <h1 class="fw-bold mb-4 mt-4">Ordini aperti</h1>
+    <h1 class="fw-bold mb-4 mt-4">Open orders</h1>
     <ul v-if="orders.length > 0" class="list-group">
       <li v-for="order in orders" :key="order.id" class="list-group-item">
         <a @click="selectedOrder(order)">
@@ -28,7 +28,7 @@
         </a>
       </li>
     </ul>
-    <p v-else>Nessun ordine aperto.</p>
+    <p v-else>No open order.</p>
   </div>
 
 </template>
@@ -66,7 +66,7 @@ export default {
     selectedOrder(order) {
       localStorage.setItem('selectedOrder', JSON.stringify({
         id: order.id,
-        items: order.order_items
+        items: order.items
       }));
       this.$router.push({ name: 'OpenOrder' });
     }

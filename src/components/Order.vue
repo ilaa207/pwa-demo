@@ -10,24 +10,22 @@
             <Modal ref="orderModal" modalId="orderModal" :title="modalTitle">
                 <p>{{ modalMessage }}</p>
             </Modal>
-            <h2 class="fw-bold">Nuovo ordine</h2>
-            <p class="fs-5">Crea un nuovo ordine per: {{this.customer.name}}</p>
+            <h2 class="fw-bold">New order</h2>
+            <p class="fs-5">Place a new order for: {{this.customer.name}}</p>
         </div>
         <ul class="list-unstyled mb-4">
-            <li>&bull; Collega il lettore di barcode al dispositivo tramite Bluetooth.</li>
-            <li>&bull; Posizionati nella casella di testo sottostante per cominciare a inserire i barcode.</li>
-            <li>&bull; Leggi i barcode con il dispositivo collegato (verranno automaticamente inseriti nella casella di
-                testo).</li>
-            <li>&bull; Una volta terminato l'inserimento dei codici clicca su '<strong>Invia</strong>' per inviare il tuo
-                ordine!</li>
+            <li>&bull; Connect the barcode reader to your device via Bluetooth.</li>
+            <li>&bull; Position yourself in the text box below to start inserting the barcodes.</li>
+            <li>&bull; Read barcodes with the connected device (they will be automatically inserted into the text box).</li>
+            <li>&bull; Once you have finished entering the codes click on <strong>'Send'</strong> to send your order!</li>
         </ul>
         <div class="mb-4">
-            <textarea class="form-control" rows="10" v-model="textContent" placeholder="Scrivi qui..."></textarea>
+            <textarea class="form-control" rows="10" v-model="textContent" placeholder="Write here..."></textarea>
         </div>
         <div class="d-flex justify-content-center gap-3" style="height: 10%;">
-            <button id="send" class="btn btn-primary px-4 w-50 fs-3 mb-3" @click="sendOrder">Invia</button>
+            <button id="send" class="btn btn-primary px-4 w-50 fs-3 mb-3" @click="sendOrder">Send</button>
             <button id="reset" class="btn btn-primary px-4 w-50 fs-3 mb-3"
-                @click="this.textContent = ''" title="Cancella tutti i codici inseriti">Cancella tutto</button>
+                @click="this.textContent = ''" title="Cancella tutti i codici inseriti">Delete all</button>
         </div>
     </div>
 </template>
@@ -53,6 +51,12 @@ export default {
     },
     methods: {
         async sendOrder() {
+            if (this.textContent.trim() === '') {
+            this.modalTitle = "Error!";
+            this.modalMessage = "The area cannot be empty, please enter your barcodes.";
+            this.$refs.orderModal.openModal();
+            return; // Esci dalla funzione se la textarea è vuota
+            }
             let token = localStorage.getItem('token').replace(/"/g, ''); // Rimuovo le virgolette
             // Crea un blob con i dati
             const blob = new Blob([this.textContent], { type: 'text/plain' });
@@ -61,16 +65,16 @@ export default {
             const formData = new FormData();
             formData.append('file', file); // Aggiungi il file direttamente
             try {
-                await axios.get('http://localhost:3000/order_sent');
+                let response = await axios.get('http://localhost:3000/order_sent');
                 this.textContent = '';
                 console.log(response);
-                this.modalTitle = "Ordine inviato!";
-                this.modalMessage = "Il tuo oridine è stato inviato correttamente!";
+                this.modalTitle = "Order sent!";
+                this.modalMessage = "Your order has been sent!";
                 
             } catch (error) {
                 console.error("Sending failed, error:", error);
                 console.log(this.customer.id);
-                this.modalTitle = "Ordine non inviato!";
+                this.modalTitle = "Order not sent!";
                 this.modalMessage = "Errore: " + error.message;
             }
             this.$refs.orderModal.openModal();

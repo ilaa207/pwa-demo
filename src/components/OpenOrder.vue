@@ -8,15 +8,15 @@
     <h1>Ordine n° {{ this.order.id }}</h1>
     <ul class="list-group list-group-flush">
         <li v-for="item in this.order.items" :key="item.id" class="client-list list-group-item">
-            ID articolo: {{ item.id }} <br>
+            Item ID: {{ item.id }} <br>
             
-            &emsp;Codice cliente: {{ item.cod_articolo_cliente }} <br>
-            &emsp;Codice fornitore: {{ item.cod_articolo_fornitore }} <br>
-            &emsp;N. vaschette: {{ item.n_vaschette }} <br>
-            &emsp;Qta. evasa: {{ item.qta_evasa }} <br>
-            &emsp;Ripiano: {{ item.ripiano }} <br>
-            &emsp;Scaffale: {{ item.scaffale }} <br>
-            &emsp;Descrizione: {{ item.descrizione }}<br> 
+            &emsp;Client code: {{ item.code_item_client }} <br>
+            &emsp;Supplier code: {{ item.code_item_supplier }} <br>
+            &emsp;N. containers: {{ item.n_containers }} <br>
+            &emsp;Quantity delivered: {{ item.quantity_delivered }} <br>
+            &emsp;Shelf: {{ item.shelf }} <br>
+            &emsp;Shelving unit: {{ item.shelving_unit }} <br>
+            &emsp;Description: {{ item.description }}<br> 
         </li>
     </ul>
 </template>

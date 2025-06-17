@@ -4,7 +4,7 @@
         <ul class="list-group list-group-flush">
             <li v-for="customer in customers" :key="customer.id" class="client-list list-group-item">
                 <a @click="choose(customer)" class="text-decoration-none">
-                    {{ customer.nome_azienda }}
+                    {{ customer.company_name }}
                     <i class="bi bi-chevron-right"></i>
                 </a>
 
@@ -31,7 +31,7 @@ export default {
         async searchcustomers() {
             let token = localStorage.getItem('token').replace(/"/g, '');
             try {
-                const response = await axios.get('http://localhost:3000/client', {
+                const response = await axios.get('http://localhost:3000/client?user=1', {
                     headers: {
                         'authorization': `Bearer ${token}`,
                         'accept': 'application/json',
@@ -47,7 +47,7 @@ export default {
         async choose(customer) {
             localStorage.setItem('selectedCustomer', JSON.stringify({
                 id: customer.id,
-                name: customer.nome_azienda
+                name: customer.company_name
             }));
             this.$router.push({ name: 'Home' });
         }

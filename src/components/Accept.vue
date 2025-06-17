@@ -10,25 +10,22 @@
             <Modal ref="orderModal" modalId="orderModal" :title="modalTitle">
                 <p>{{ modalMessage }}</p>
             </Modal>
-            <h2 class="fw-bold">Accetta un ordine</h2>
-            <p class="fs-5">Qui puoi accettare l'ordine da {{ this.customer.name }}</p>
+            <h2 class="fw-bold">Accept an order</h2>
+            <p class="fs-5">Here you can accept the order from {{ this.customer.name }}</p>
         </div>
         <ul class="list-unstyled mb-4">
-            <li>&bull; Collega il lettore di barcode al dispositivo tramite Bluetooth.</li>
-            <li>&bull; Posizionati nella casella di testo sottostante per cominciare a inserire i barcode degli articoli
-                da accettare.</li>
-            <li>&bull; Leggi i barcode con il dispositivo collegato (verranno automaticamente inseriti nella casella di
-                testo).</li>
-            <li>&bull; Una volta terminato l'inserimento dei codici clicca su '<strong>Accetta</strong>' per accettare
-                l'ordine!</li>
+            <li>&bull; Connect the barcode reader to your device via Bluetooth.</li>
+            <li>&bull; Position yourself in the text box below to start entering the barcodes of the items to be accepted.</li>
+            <li>&bull; Read barcodes with the connected device (they will be automatically inserted into the text box).</li>
+            <li>&bull; Once you have finished entering the codes click on <strong>'Accept'</strong> to accept the order!</li>
         </ul>
         <div class="mb-4">
-            <textarea class="form-control" rows="10" v-model="textContent" placeholder="Scrivi qui..."></textarea>
+            <textarea class="form-control" rows="10" v-model="textContent" placeholder="Write here..."></textarea>
         </div>
         <div class="d-flex justify-content-center gap-3" style="height: 10%;">
-            <button id="accept" class="btn btn-primary px-4 w-50 fs-3 mb-3" v-on:click="acceptOrder">Accetta</button>
+            <button id="accept" class="btn btn-primary px-4 w-50 fs-3 mb-3" v-on:click="acceptOrder">Accept</button>
             <button id="reset" class="btn btn-primary px-4 w-50 fs-3 mb-3" v-on:click="this.textContent = ''"
-                title="Cancella tutti i codici inseriti">Cancella tutto</button>
+                title="Cancella tutti i codici inseriti">Delete all</button>
         </div>
     </div>
 </template>
@@ -54,6 +51,12 @@ export default {
     },
     methods: {
         async acceptOrder() {
+            if (this.textContent.trim() === '') {
+            this.modalTitle = "Error!";
+            this.modalMessage = "The area cannot be empty, please enter your barcodes.";
+            this.$refs.orderModal.openModal();
+            return; // Esci dalla funzione se la textarea è vuota
+            }
             let token = localStorage.getItem('token').replace(/"/g, ''); // Rimuovo le virgolette
 
             // Crea un blob con i dati
@@ -66,15 +69,15 @@ export default {
             formData.append('file', file); // Aggiungi il file direttamente
 
             try {
-                await axios.get('http://localhost:3000/order_accepted');
+                let response = await axios.get('http://localhost:3000/order_accepted');
 
                 console.log(response);
-                this.modalTitle = "Ordine accettato!";
-                this.modalMessage = "Il tuo ordine è stato accettato con successo!";
+                this.modalTitle = "Order accepted accettato!";
+                this.modalMessage = "Your order has been accepeted!";
 
             } catch (error) {
                 console.error("Failed acceptance, error:", error);
-                this.modalTitle = "Order non accettato!";
+                this.modalTitle = "Order not accepted!";
                 this.modalMessage = "Errore: " + error.message;
             }
             this.$refs.orderModal.openModal();

@@ -9,11 +9,11 @@
                     <h2 class="text-center fw-bold">Login</h2>
                     <form @submit.prevent="login"> <!-- Form che gestisce l'invio -->
                         <div class="input align-items-center">
-                            <input type="email" v-model="email" placeholder="email@esempio.com" autocomplete="email"
+                            <input type="email" v-model="email" placeholder="email@example.com" autocomplete="email"
                                 class="form-control mx-1 mb-3" required />
                             <input id="password" type="password" v-model="password" placeholder="password" autocomplete="password"
                                 class="form-control mx-1 mb-3" required />
-                            <input type="checkbox" class="mx-2" @click="showPassword()">Mostra Password</input>
+                            <input type="checkbox" class="mx-2" @click="showPassword()">Show Password</input>
                             <p class="text-danger mt-2" v-if="errorMessage" style="color: red;">
                                 {{ errorMessage }}
                             </p>
@@ -67,24 +67,24 @@ export default {
                         // Login successful
                         localStorage.setItem("token", JSON.stringify(user.token));
                         localStorage.setItem("id", JSON.stringify(user.id));
-                        localStorage.setItem("nome_azienda", JSON.stringify(user.nome_azienda));
-                        localStorage.setItem("nome_referente", JSON.stringify(user.nome_referente));
+                        localStorage.setItem("company_name", JSON.stringify(user.company_name));
+                        localStorage.setItem("contact_name", JSON.stringify(user.contact_name));
                         localStorage.setItem("email", JSON.stringify(user.email));
                         localStorage.setItem("logo", JSON.stringify(user.logo));
 
                         this.$router.push({ name: 'Client' });
                     } else {
                         // Login failed
-                        this.errorMessage = 'E-mail o password errati.';
+                        this.errorMessage = 'invalid e-mail or password.';
                         console.warn("Login failed, invalid credentials.");
                     }
                 } else {
-                    this.errorMessage = 'Errore durante il recupero degli utenti.';
+                    this.errorMessage = 'Error while retrieving users.';
                     console.warn("Login failed, invalid data format.");
                 }
 
             } catch (error) {
-                this.errorMessage = 'Errore durante il login.';
+                this.errorMessage = 'Error while login.';
                 console.error("Error while logging in:", error);
             }
         }

@@ -14,11 +14,11 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3" style="width: 90%">
                     <li class="nav-item">
                         <a id="client" class="nav-link active bi bi-person rounded-1 mb-2" aria-current="page"
-                            @click="this.$router.push({ name: 'Client' });" style="color: #ffffff;">&nbsp;Clienti</a>
+                            @click="this.$router.push({ name: 'Client' });" style="color: #ffffff;">&nbsp;Clients</a>
                     </li>
                     <li class="nav-item">
                         <a id="openOrders" class="nav-link active bi bi-box-seam rounded-1 mb-2" aria-current="page"
-                            href="/home#ordini-aperti" style="color: #ffffff;">&nbsp;Ordini aperti</a>
+                            href="/home#ordini-aperti" style="color: #ffffff;">&nbsp;Open orders</a>
                     </li>
                     <!--<li class="nav-item">
                         <a id="facilities" class="nav-link active bi bi-kanban rounded-1 mb-2" aria-current="page"
@@ -41,8 +41,8 @@
                 <img :src="logo" alt="Logo" height="100" width="100" />
             </div>
             <div class="content-area">
-                <h3 class="my-2">{{ nome_referente }}</h3>
-                <p class="my-1">{{ nome_azienda }}</p>
+                <h3 class="my-2">{{ contact_name }}</h3>
+                <p class="my-1">{{ company_name }}</p>
                 <p>{{ email }}</p>
             </div>
         </div>
@@ -59,8 +59,8 @@ export default {
             // Flag per determinare se la navbar è aperta o chiusa
             isNavbarOpen: false,
             email: '',
-            nome_azienda: '',
-            nome_referente: '',
+            company_name: '',
+            contact_name: '',
             logo: ""
         };
     },
@@ -97,8 +97,8 @@ export default {
 
     mounted() {
         this.email = localStorage.getItem('email').replace(/"/g, '');
-        this.nome_azienda = localStorage.getItem('nome_azienda').replace(/"/g, '');
-        this.nome_referente = localStorage.getItem('nome_referente').replace(/"/g, '');
+        this.company_name = localStorage.getItem('company_name').replace(/"/g, '');
+        this.contact_name = localStorage.getItem('contact_name').replace(/"/g, '');
         this.logo = 'data:image/png;base64,' + localStorage.getItem('logo').replace(/"/g, '') || "";
     }
 }
