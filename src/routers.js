@@ -5,7 +5,7 @@ import Accept from "./components/Accept.vue";
 import Client from "./components/Client.vue";
 import Facilities from "./components/Facilities.vue";
 import OpenOrder from "./components/OpenOrder.vue";
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
     {
         path: '/', // Questa è la prima pagina che si apre
@@ -49,7 +49,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 });
 
